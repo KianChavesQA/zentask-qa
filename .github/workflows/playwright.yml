@@ -25,7 +25,7 @@ jobs:
 
     - name: Run Playwright tests
       run: npx playwright test
-      continue-on-error: true # Garante que o report seja gerado mesmo se o teste falhar
+      continue-on-error: true 
 
     - name: Get Allure history
       uses: actions/checkout@v4
