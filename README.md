@@ -1,6 +1,6 @@
 # 🚀 ZenTask QA 
-> **Fins Académicos & Portfólio de QA Automation** >
-> 
+**Fins Académicos & Portfólio de QA Automation** 
+
 > **Live Report:** [![Allure Report](https://img.shields.io/badge/Allure-Report-FFC107?style=for-the-badge&logo=allure&logoColor=black)](https://KianChavesQA.github.io/zentask-qa/)
 
 ---
