@@ -1,5 +1,6 @@
 # 🚀 ZenTask QA - Senior Bug Hunting API
-> **Fins Académicos & Portfólio de QA Automation** > **Status do Build:** ![CI Pipeline](https://img.shields.io/github/actions/workflow/status/seu-usuario/zentask-qa/main.yml?branch=main&style=flat-square)  
+> **Fins Académicos & Portfólio de QA Automation** >
+> 
 > **Report:** ![Allure Report](https://img.shields.io/badge/Allure-Report-FFC107?style=flat-square&logo=allure&logoColor=black)
 
 ---
