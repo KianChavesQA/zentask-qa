@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>ZenTask Pro - QA Lab</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #eceff1; padding: 40px; }
+        .container { max-width: 500px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .task-item { border-bottom: 1px solid #f0f0f0; padding: 15px 0; display: flex; justify-content: space-between; align-items: center; }
+        .btn-add { background: #1a73e8; color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; width: 100%; font-weight: bold; }
+        input { width: 95%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; }
+        .status { font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #555; }
+        #loading { display: none; color: #f4b400; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📋 Gestão de Tarefas Internas</h2>
+        <input type="text" id="taskTitle" placeholder="O que precisa ser feito?">
+        
+        <button class="btn-add" id="btnSave">Adicionar Tarefa</button>
+        
+        <p id="loading">Enviando para o servidor...</p>
+        <div id="taskList"></div>
+    </div>
+
+    <script>
+        const btnSave = document.getElementById('btnSave');
+        const taskTitle = document.getElementById('taskTitle');
+        const loading = document.getElementById('loading');
+
+        async function loadTasks() {
+            try {
+                const res = await fetch('http://localhost:3000/tasks');
+                const data = await res.json();
+                const list = document.getElementById('taskList');
+                list.innerHTML = data.map(t => `
+                    <div class="task-item">
+                        <span>${t.title}</span>
+                        <div>
+                            <span class="status">${t.status}</span>
+                            <button onclick="changeStatus(${t.id}, 'Concluída')">✅</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) { console.error("Erro ao carregar"); }
+        }
+
+        btnSave.onclick = async () => {
+            const title = taskTitle.value;
+            loading.style.display = 'block';
+
+            // BUG: O frontend não valida se o campo está vazio antes de enviar
+            await fetch('http://localhost:3000/tasks', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title })
+            });
+
+            // BUG: Exibe sucesso mesmo que a requisição demore ou falhe
+            alert("Tarefa salva!"); 
+            
+            taskTitle.value = '';
+            loading.style.display = 'none';
+            loadTasks();
+        };
+
+        async function changeStatus(id, newStatus) {
+            await fetch(`http://localhost:3000/tasks/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: newStatus })
+            });
+            loadTasks();
+        }
+
+        loadTasks();
+    </script>
+</body>
+</html>
