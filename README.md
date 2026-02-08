@@ -1,7 +1,8 @@
 # 🚀 ZenTask QA 
-**Fins Académicos & Portfólio de QA Automation** 
+## Fins Académicos & Portfólio de QA Automation 
+**Live Report abaixo:** 
 
-> **Live Report:** [![Allure Report](https://img.shields.io/badge/Allure-Report-FFC107?style=for-the-badge&logo=allure&logoColor=black)](https://KianChavesQA.github.io/zentask-qa/)
+[![Allure Report](https://img.shields.io/badge/Allure%20Report-FFC107?style=for-the-badge&logo=Allure&logoColor=black)](https://KianChavesQA.github.io/zentask-qa/)
 
 ---
 
@@ -43,16 +44,6 @@ npm run start
 ### 3. Executar testes e gerar o Allure em outro
 npx playwright test
 npx allure generate allure-results --clean -o allure-report
-npx allure open allure-report
+npx allure open allure-report```
 
-### 4. Dasboard Allure
 
-# O relatório final pode ser consultado online e apresenta:
-
-    Trend Chart: Evolução dos testes ao longo dos deploys.
-
-    Categories: Separação entre falhas de infraestrutura e bugs reais de lógica.
-
-    Attachments: Logs detalhados de requisição e resposta para debug rápido.
-
-🔗 Aceder ao Relatório no GitHub Pages: https://KianChavesQA.github.io/zentask-qa/
