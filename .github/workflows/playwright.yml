@@ -24,7 +24,7 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run API
-      run: node server.js
+      run: node server.js &
 
     - name: Run Playwright tests
       run: npx playwright test
