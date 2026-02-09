@@ -1,4 +1,5 @@
 const fastify = require('fastify')({ logger: false });
+const escapeHtml = require('escape-html');
 
 async function bootstrap() {
   try {
@@ -140,7 +141,15 @@ async function bootstrap() {
       }
     }, async (req, reply) => {
       await new Promise(r => setTimeout(r, Math.random() * 2000));
-      const newTask = { id: nextTaskId++, ...req.body, status: 'TODO' };
+      const sanitizedBody = Object.fromEntries(
+        Object.entries(req.body).map(([key, value]) => {
+          if (typeof value === 'string') {
+            return [key, escapeHtml(value)];
+          }
+          return [key, value];
+        })
+      );
+      const newTask = { id: nextTaskId++, ...sanitizedBody, status: 'TODO' };
       tasks.push(newTask);
       return newTask; // BUG: Retorna 200 em vez de 201
     });
